@@ -1,6 +1,8 @@
 from datetime import datetime
 from decimal import Decimal
 
+import uuid
+
 from sqlalchemy import (
     BigInteger,
     DateTime,
@@ -18,7 +20,7 @@ from app.models.base import BaseModel
 class MarketCandle(BaseModel):
     __tablename__ = "market_candles"
 
-    asset_id: Mapped[str] = mapped_column(
+    asset_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("market_assets.id", ondelete="CASCADE"),
         nullable=False,
     )
