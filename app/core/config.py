@@ -29,4 +29,6 @@ class Settings(BaseSettings):
     telegram_bot_token: SecretStr | None = None
     telegram_chat_id: str | None = None
 
+    coingecko_api_key: SecretStr | None = None
+
 settings = Settings()
