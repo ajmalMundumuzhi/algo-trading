@@ -1,23 +1,32 @@
 
 import logging
 
+from app.agents.news_sentiment.classifier import classify_news
+from app.agents.news_sentiment.deduplicator import deduplicate_articles
+from app.agents.news_sentiment.repository import (
+    get_active_news_assets,
+    save_analyzed_articles,
+)
+from app.core.database import SessionLocal
 from app.integrations.news.rss_client import RSSNewsClient
-from app.agents.news_sentiment.deduplicator import (
-    deduplicate_articles,
-)
-from app.agents.news_sentiment.classifier import (
-    classify_news,
-)
 
 logger = logging.getLogger(__name__)
 
 
-async def run_news_analysis(assets: list[dict]) -> dict:
+async def run_news_analysis(assets: list[dict] | None = None) -> dict:
+    if assets is None:
+        with SessionLocal() as db:
+            assets = get_active_news_assets(db)
+
+    if not assets:
+        raise RuntimeError(
+            "No active market assets found in the database"
+        )
+
     client = RSSNewsClient()
 
     try:
         collection = await client.fetch_all()
-
     finally:
         await client.close()
 
@@ -26,15 +35,18 @@ async def run_news_analysis(assets: list[dict]) -> dict:
     )
 
     analyzed_articles = []
+    persistence_records = []
 
     for article in deduplication["articles"]:
         try:
-            analysis = classify_news(
-                article,
-                assets,
-            )
+            analysis = classify_news(article, assets)
 
             analyzed_articles.append(analysis)
+
+            persistence_records.append({
+                "article": article,
+                "analysis": analysis,
+            })
 
         except Exception:
             logger.exception(
@@ -59,17 +71,51 @@ async def run_news_analysis(assets: list[dict]) -> dict:
         severity = article["severity"]["severity"]
         sentiment = article["sentiment"]["sentiment"]
 
-        severity_counts[severity] += 1
-        sentiment_counts[sentiment] += 1
+        if severity in severity_counts:
+            severity_counts[severity] += 1
+
+        if sentiment in sentiment_counts:
+            sentiment_counts[sentiment] += 1
+
+    persistence = {
+        "status": "pending",
+        "received": len(persistence_records),
+        "inserted": 0,
+        "duplicates": 0,
+    }
+
+    try:
+        with SessionLocal() as db:
+            persistence_result = save_analyzed_articles(
+                db,
+                persistence_records,
+            )
+
+        persistence = {
+            "status": "ok",
+            **persistence_result,
+        }
+
+    except Exception:
+        logger.exception(
+            "Failed to persist analyzed news articles"
+        )
+
+        persistence["status"] = "failed"
+
+    if not collection["successful_sources"]:
+        pipeline_status = "failed"
+    elif (
+        collection["failed_sources"]
+        or persistence["status"] == "failed"
+    ):
+        pipeline_status = "partial"
+    else:
+        pipeline_status = "ok"
 
     return {
-        "status": (
-            "failed"
-            if not collection["successful_sources"]
-            else "partial"
-            if collection["failed_sources"]
-            else "ok"
-        ),
+        "status": pipeline_status,
+        "assets_loaded": len(assets),
         "collection": {
             "total_articles": collection["total_articles"],
             "successful_sources": collection["successful_sources"],
@@ -85,5 +131,6 @@ async def run_news_analysis(assets: list[dict]) -> dict:
             "sentiment_counts": sentiment_counts,
             "severity_counts": severity_counts,
         },
+        "persistence": persistence,
         "articles": analyzed_articles,
     }
