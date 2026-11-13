@@ -2,14 +2,25 @@
 import pandas as pd
 
 from app.agents.technical.indicators import calculate_ema
+from app.agents.technical.config import INDICATOR_CONFIG
 
 
 def detect_trend(
     candles: pd.DataFrame,
-    fast_period: int = 20,
-    slow_period: int = 50,
-    min_separation_pct: float = 0.1,
+    fast_period: int | None = None,
+    slow_period: int | None = None,
+    min_separation_pct: float | None = None,
 ) -> dict:
+    config = INDICATOR_CONFIG
+
+    fast_period = fast_period or config.fast_ema
+    slow_period = slow_period or config.slow_ema
+    min_separation_pct = (
+        min_separation_pct
+        if min_separation_pct is not None
+        else config.minimum_ema_separation_pct
+    )
+
     if "close" not in candles.columns:
         raise ValueError("Candles must contain a close column")
 
@@ -46,13 +57,10 @@ def detect_trend(
 
     if separation_pct < min_separation_pct:
         trend = "sideways"
-
     elif close > fast > slow:
         trend = "bullish"
-
     elif close < fast < slow:
         trend = "bearish"
-
     else:
         trend = "sideways"
 
@@ -66,9 +74,14 @@ def detect_trend(
 
 def detect_ema_crossover(
     candles: pd.DataFrame,
-    fast_period: int = 20,
-    slow_period: int = 50,
+    fast_period: int | None = None,
+    slow_period: int | None = None,
 ) -> dict:
+    config = INDICATOR_CONFIG
+
+    fast_period = fast_period or config.fast_ema
+    slow_period = slow_period or config.slow_ema
+
     if "close" not in candles.columns:
         raise ValueError("Candles must contain a close column")
 
@@ -85,23 +98,15 @@ def detect_ema_crossover(
     fast_ema = calculate_ema(candles, fast_period)
     slow_ema = calculate_ema(candles, slow_period)
 
-    previous_difference = (
-        fast_ema.iloc[-2] - slow_ema.iloc[-2]
-    )
-
-    current_difference = (
-        fast_ema.iloc[-1] - slow_ema.iloc[-1]
-    )
+    previous_difference = fast_ema.iloc[-2] - slow_ema.iloc[-2]
+    current_difference = fast_ema.iloc[-1] - slow_ema.iloc[-1]
 
     if pd.isna(previous_difference) or pd.isna(current_difference):
         crossover = "insufficient_data"
-
     elif previous_difference <= 0 and current_difference > 0:
         crossover = "bullish"
-
     elif previous_difference >= 0 and current_difference < 0:
         crossover = "bearish"
-
     else:
         crossover = "none"
 

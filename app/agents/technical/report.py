@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 
 import pandas as pd
 
+from app.agents.technical.config import INDICATOR_CONFIG
 from app.agents.technical.indicators import (
     calculate_ema,
     calculate_rsi,
@@ -17,6 +18,9 @@ from app.agents.technical.analyzer import (
     analyze_volume,
 )
 from app.agents.technical.scorer import calculate_technical_score
+from app.agents.technical.data_validation import (
+    validate_technical_candles,
+)
 
 
 def build_technical_report(
@@ -25,41 +29,38 @@ def build_technical_report(
     timeframe: str,
 ) -> dict:
 
-    required_columns = {
-        "timestamp",
-        "open",
-        "high",
-        "low",
-        "close",
-        "volume",
-    }
+    candles = validate_technical_candles(candles)
 
-    missing_columns = required_columns - set(candles.columns)
+    minimum_candles = max(
+        INDICATOR_CONFIG.minimum_candles,
+        INDICATOR_CONFIG.slow_ema + 1,
+        INDICATOR_CONFIG.macd_slow + INDICATOR_CONFIG.macd_signal,
+        INDICATOR_CONFIG.volume_average_period + 1,
+    )
 
-    if missing_columns:
-        raise ValueError(
-            f"Missing candle columns: {sorted(missing_columns)}"
-        )
-
-    if candles.empty:
-        raise ValueError("Cannot analyse an empty candle dataset")
-
-    if len(candles) < 50:
+    if len(candles) < minimum_candles:
         return {
             "status": "insufficient_data",
             "symbol": symbol,
             "timeframe": timeframe,
             "candles_available": len(candles),
-            "required_candles": 50,
+            "required_candles": minimum_candles,
             "score": None,
         }
 
-    candles = candles.copy()
+    config = INDICATOR_CONFIG
 
-    ema_20 = calculate_ema(candles, 20)
-    ema_50 = calculate_ema(candles, 50)
-    rsi = calculate_rsi(candles)
-    macd = calculate_macd(candles)
+    ema_fast = calculate_ema(candles, config.fast_ema)
+    ema_slow = calculate_ema(candles, config.slow_ema)
+
+    rsi = calculate_rsi(candles, config.rsi_period)
+
+    macd = calculate_macd(
+        candles,
+        fast_period=config.macd_fast,
+        slow_period=config.macd_slow,
+        signal_period=config.macd_signal,
+    )
 
     trend = detect_trend(candles)
     crossover = detect_ema_crossover(candles)
@@ -81,7 +82,20 @@ def build_technical_report(
         "symbol": symbol,
         "timeframe": timeframe,
         "analyzed_at": datetime.now(timezone.utc).isoformat(),
-        "latest_candle_timestamp": str(latest["timestamp"]),
+        "latest_candle_timestamp": latest["timestamp"].isoformat(),
+        "candles_available": len(candles),
+        "configuration": {
+            "fast_ema": config.fast_ema,
+            "slow_ema": config.slow_ema,
+            "rsi_period": config.rsi_period,
+            "macd_fast": config.macd_fast,
+            "macd_slow": config.macd_slow,
+            "macd_signal": config.macd_signal,
+            "volume_average_period": config.volume_average_period,
+            "volume_confirmation_multiplier": (
+                config.volume_confirmation_multiplier
+            ),
+        },
         "price": {
             "open": float(latest["open"]),
             "high": float(latest["high"]),
@@ -90,9 +104,9 @@ def build_technical_report(
             "volume": float(latest["volume"]),
         },
         "indicators": {
-            "ema_20": float(ema_20.iloc[-1]),
-            "ema_50": float(ema_50.iloc[-1]),
-            "rsi_14": float(rsi.iloc[-1]),
+            "ema_fast": float(ema_fast.iloc[-1]),
+            "ema_slow": float(ema_slow.iloc[-1]),
+            "rsi": float(rsi.iloc[-1]),
             "macd": float(macd["macd"].iloc[-1]),
             "macd_signal": float(macd["signal"].iloc[-1]),
             "macd_histogram": float(macd["histogram"].iloc[-1]),
