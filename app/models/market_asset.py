@@ -3,6 +3,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import BaseModel
 
+from decimal import Decimal
+
 class MarketAsset(BaseModel):
     __tablename__ = "market_assets"
 
@@ -33,7 +35,7 @@ class MarketAsset(BaseModel):
         nullable=True
     )
 
-    market_cap: Mapped[bool] = mapped_column(
+    market_cap: Mapped[Decimal | None] = mapped_column(
         Numeric(30, 2),
         nullable=True,
     )
