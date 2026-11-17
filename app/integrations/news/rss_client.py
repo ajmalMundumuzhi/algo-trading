@@ -1,14 +1,49 @@
 
 import asyncio
+import calendar
 import hashlib
 import logging
+import re
+
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from html import unescape
+from html.parser import HTMLParser
 
 import feedparser
 import httpx
 
 logger = logging.getLogger(__name__)
+
+
+class HTMLTextExtractor(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+        self.skip_depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in {"script", "style"}:
+            self.skip_depth += 1
+        elif tag in {"p", "div", "br", "li"} and not self.skip_depth:
+            self.parts.append(" ")
+
+    def handle_endtag(self, tag):
+        if tag in {"script", "style"} and self.skip_depth:
+            self.skip_depth -= 1
+        elif tag in {"p", "div", "li"} and not self.skip_depth:
+            self.parts.append(" ")
+
+    def handle_data(self, data):
+        if not self.skip_depth:
+            self.parts.append(data)
+
+    def get_text(self):
+        return re.sub(
+            r"\s+",
+            " ",
+            unescape(" ".join(self.parts)),
+        ).strip()
 
 
 class RSSNewsClient:
@@ -18,39 +53,95 @@ class RSSNewsClient:
         "the_block": "https://www.theblock.co/rss.xml",
     }
 
+    MAX_RETRIES = 3
+
     def __init__(self):
         self.client = httpx.AsyncClient(
-            timeout=20.0,
+            timeout=httpx.Timeout(
+                20.0,
+                connect=10.0,
+            ),
             follow_redirects=True,
             headers={
-                "User-Agent": "AlgoTradingNewsBot/1.0"
+                "User-Agent": "AlgoTradingNewsBot/1.0",
+                "Accept": "application/rss+xml, application/xml, text/xml",
             },
         )
 
     @staticmethod
-    def _parse_date(entry: dict) -> str | None:
-        date_value = (
-            entry.get("published")
-            or entry.get("updated")
-        )
+    def _clean_html(value: str) -> str:
+        if not value:
+            return ""
 
-        if not date_value:
-            return None
+        parser = HTMLTextExtractor()
 
         try:
-            parsed_date = parsedate_to_datetime(date_value)
+            parser.feed(str(value))
+            parser.close()
+            return parser.get_text()
+        except Exception:
+            logger.warning("Failed to clean RSS HTML content")
+            return re.sub(
+                r"\s+",
+                " ",
+                re.sub(r"<[^>]+>", " ", str(value)),
+            ).strip()
 
-            if parsed_date.tzinfo is None:
-                parsed_date = parsed_date.replace(
-                    tzinfo=timezone.utc
+    @staticmethod
+    def _parse_date(entry: dict) -> str | None:
+        for field in ("published_parsed", "updated_parsed"):
+            parsed_value = entry.get(field)
+
+            if parsed_value:
+                try:
+                    timestamp = calendar.timegm(parsed_value)
+
+                    return datetime.fromtimestamp(
+                        timestamp,
+                        timezone.utc,
+                    ).isoformat()
+                except (TypeError, ValueError, OverflowError):
+                    pass
+
+        for field in ("published", "updated"):
+            date_value = entry.get(field)
+
+            if not date_value:
+                continue
+
+            try:
+                parsed_date = parsedate_to_datetime(date_value)
+
+                if parsed_date.tzinfo is None:
+                    parsed_date = parsed_date.replace(
+                        tzinfo=timezone.utc
+                    )
+
+                return parsed_date.astimezone(
+                    timezone.utc
+                ).isoformat()
+
+            except (TypeError, ValueError, OverflowError):
+                pass
+
+            try:
+                parsed_date = datetime.fromisoformat(
+                    date_value.replace("Z", "+00:00")
                 )
 
-            return parsed_date.astimezone(
-                timezone.utc
-            ).isoformat()
+                if parsed_date.tzinfo is None:
+                    parsed_date = parsed_date.replace(
+                        tzinfo=timezone.utc
+                    )
 
-        except (TypeError, ValueError, OverflowError):
-            return None
+                return parsed_date.astimezone(
+                    timezone.utc
+                ).isoformat()
+
+            except (TypeError, ValueError, OverflowError):
+                pass
+
+        return None
 
     @staticmethod
     def _create_article_id(
@@ -69,13 +160,24 @@ class RSSNewsClient:
         source: str,
         entry: dict,
     ) -> dict | None:
-        title = entry.get("title", "").strip()
-        url = entry.get("link", "").strip()
+        title = RSSNewsClient._clean_html(
+            entry.get("title", "")
+        )
+
+        url = str(entry.get("link", "")).strip()
 
         if not title or not url:
             return None
 
         summary = entry.get("summary", "")
+
+        if not summary:
+            content = entry.get("content", [])
+
+            if isinstance(content, list) and content:
+                summary = content[0].get("value", "")
+
+        summary = RSSNewsClient._clean_html(summary)
 
         return {
             "article_id": RSSNewsClient._create_article_id(
@@ -93,7 +195,6 @@ class RSSNewsClient:
             ).isoformat(),
         }
 
-    
     async def fetch_feed(
         self,
         source: str,
@@ -101,7 +202,7 @@ class RSSNewsClient:
     ) -> list[dict]:
         last_error = None
 
-        for attempt in range(1, 4):
+        for attempt in range(1, self.MAX_RETRIES + 1):
             try:
                 response = await self.client.get(feed_url)
                 response.raise_for_status()
@@ -144,20 +245,21 @@ class RSSNewsClient:
                 last_error = error
 
                 logger.warning(
-                    "Feed %s failed on attempt %s/3: %s",
+                    "Feed %s failed on attempt %s/%s: %s",
                     source,
                     attempt,
+                    self.MAX_RETRIES,
                     repr(error),
                 )
 
-                if attempt < 3:
+                if attempt < self.MAX_RETRIES:
                     await asyncio.sleep(attempt * 2)
 
         raise RuntimeError(
-            f"Failed to fetch {source} after 3 attempts: "
+            f"Failed to fetch {source} after "
+            f"{self.MAX_RETRIES} attempts: "
             f"{type(last_error).__name__}: {last_error}"
         ) from last_error
-
 
     async def fetch_all(self) -> dict:
         tasks = {
@@ -172,6 +274,7 @@ class RSSNewsClient:
 
         articles = []
         errors = {}
+        successful_sources = []
 
         for source, result in zip(tasks.keys(), results):
             if isinstance(result, Exception):
@@ -180,18 +283,16 @@ class RSSNewsClient:
                     source,
                     result,
                 )
+
                 errors[source] = str(result)
             else:
                 articles.extend(result)
+                successful_sources.append(source)
 
         return {
             "articles": articles,
             "total_articles": len(articles),
-            "successful_sources": [
-                source
-                for source, result in zip(tasks.keys(), results)
-                if not isinstance(result, Exception)
-            ],
+            "successful_sources": successful_sources,
             "failed_sources": errors,
         }
 

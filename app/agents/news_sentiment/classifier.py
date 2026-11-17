@@ -3,54 +3,24 @@ import re
 
 
 POSITIVE_KEYWORDS = {
-    "surge",
-    "surges",
-    "rally",
-    "rallies",
-    "bullish",
-    "adoption",
-    "approval",
-    "approved",
-    "partnership",
-    "integration",
-    "inflow",
-    "inflows",
-    "record high",
-    "breakout",
-    "growth",
-    "recovery",
-    "profit",
-    "gains",
+    "surge", "surges", "rally", "rallies", "bullish",
+    "adoption", "approval", "approved", "partnership",
+    "integration", "inflow", "inflows", "record high",
+    "breakout", "growth", "recovery", "profit", "gains",
+    "rises", "rose", "climbs", "climbed", "upgrade",
+    "launch", "launched", "expansion", "milestone",
 }
 
 NEGATIVE_KEYWORDS = {
-    "crash",
-    "crashes",
-    "plunge",
-    "plunges",
-    "bearish",
-    "hack",
-    "hacked",
-    "exploit",
-    "exploited",
-    "breach",
-    "stolen",
-    "lawsuit",
-    "ban",
-    "banned",
-    "delisting",
-    "delisted",
-    "bankruptcy",
-    "insolvency",
-    "outflow",
-    "outflows",
-    "loss",
-    "losses",
-    "collapse",
-    "liquidation",
-    "liquidations",
+    "crash", "crashes", "plunge", "plunges", "bearish",
+    "hack", "hacked", "exploit", "exploited", "breach",
+    "stolen", "lawsuit", "ban", "banned", "delisting",
+    "delisted", "bankruptcy", "insolvency", "outflow",
+    "outflows", "loss", "losses", "collapse", "liquidation",
+    "liquidations", "falls", "fell", "drops", "dropped",
+    "decline", "declines", "slump", "slumps", "suspends",
+    "suspended", "halted", "fraud", "investigation",
 }
-
 
 
 CRITICAL_PATTERNS = {
@@ -58,23 +28,17 @@ CRITICAL_PATTERNS = {
         r"\b(?:suffers?|suffered|hit by|targeted by)\s+"
         r"(?:a\s+)?(?:major\s+|security\s+)?"
         r"(?:hack|exploit|breach|attack)\b",
-
         r"\b(?:protocol|exchange|bridge|network|platform)\s+"
         r"(?:was|has been|have been)\s+"
         r"(?:hacked|exploited|breached|attacked)\b",
-
-        r"\b(?:hack|exploit|breach|attack)\s+"
-        r"(?:of|on|against)\s+"
-        r"(?:the\s+)?(?:protocol|exchange|bridge|network|platform)\b",
-
         r"\b(?:private keys?|wallets?)\s+"
         r"(?:were\s+)?(?:compromised|drained)\b",
+        r"\b(?:millions|billions|\$[\d,.]+)\s+"
+        r"(?:stolen|drained)\b",
     ),
-
     "critical_service_disruption": (
         r"\b(?:withdrawals?|deposits?)\s+"
         r"(?:have been\s+)?suspended\b",
-
         r"\b(?:exchange|protocol|bridge)\s+"
         r"(?:has\s+)?(?:shut down|halted operations)\b",
     ),
@@ -83,12 +47,13 @@ CRITICAL_PATTERNS = {
 
 HIGH_PATTERNS = {
     "delisting": (
-        r"\b(?:will be|to be|is being)\s+delisted\b",
-        r"\bdelisting\s+of\b",
+        r"\bdelist(?:ed|ing)?\b",
+        r"\b(?:exchange|binance|coinbase|kraken)\s+"
+        r"(?:will|plans to|announces|announced)\s+"
+        r"delist\b",
     ),
     "regulatory_action": (
-        r"\b(?:charged|indicted|sued|sanctioned)\s+"
-        r"(?:by|for)\b",
+        r"\b(?:charged|indicted|sued|sanctioned)\s+(?:by|for)\b",
         r"\bregulatory\s+(?:action|crackdown|investigation)\b",
         r"\b(?:SEC|CFTC)\s+(?:files|filed)\s+"
         r"(?:a\s+)?(?:lawsuit|charges|action)\b",
@@ -97,7 +62,12 @@ HIGH_PATTERNS = {
         r"\bwithdrawals?\s+(?:restricted|frozen)\b",
         r"\btrading\s+(?:suspended|halted)\b",
     ),
+    "major_security_risk": (
+        r"\b(?:critical|major|severe)\s+"
+        r"(?:security\s+)?(?:vulnerability|exploit)\b",
+    ),
 }
+
 
 MEDIUM_PATTERNS = {
     "partnership": (
@@ -112,11 +82,31 @@ MEDIUM_PATTERNS = {
     "token_unlock": (
         r"\btoken\s+unlock\b",
         r"\bvesting\s+release\b",
+        r"\bunlock(?:s|ed)?\s+"
+        r"(?:tokens?|worth|valued)\b",
     ),
     "etf_event": (
         r"\bETF\s+(?:approval|rejection|launch)\b",
     ),
+    "fundraising": (
+        r"\braises?\s+\$[\d,.]+\s+"
+        r"(?:million|billion)\b",
+        r"\bfunding\s+round\b",
+    ),
+    "exchange_listing": (
+        r"\blisted\s+on\s+(?:binance|coinbase|kraken)\b",
+        r"\bnew\s+exchange\s+listing\b",
+    ),
+    "market_outflows": (
+        r"\bETF\s+outflows?\b",
+        r"\b(?:fund|exchange|market)\s+outflows?\b",
+    ),
+    "market_decline": (
+        r"\b(?:sharp|major|significant)\s+"
+        r"(?:price\s+)?(?:decline|drop|loss)\b",
+    ),
 }
+
 
 LOW_PATTERNS = {
     "community_event": (
@@ -131,14 +121,11 @@ def _normalize_text(text: str) -> str:
     return re.sub(
         r"\s+",
         " ",
-        str(text).lower(),
+        str(text or "").lower(),
     ).strip()
 
 
-def _find_keywords(
-    text: str,
-    keywords: set[str],
-) -> list[str]:
+def _find_keywords(text: str, keywords: set[str]) -> list[str]:
     return sorted(
         keyword
         for keyword in keywords
@@ -149,20 +136,15 @@ def _find_keywords(
     )
 
 
-def _find_patterns(
-    text: str,
-    patterns: dict,
-) -> list[str]:
-    matches = []
-
-    for event_name, expressions in patterns.items():
+def _find_patterns(text: str, patterns: dict) -> list[str]:
+    return [
+        event_name
+        for event_name, expressions in patterns.items()
         if any(
             re.search(expression, text, re.IGNORECASE)
             for expression in expressions
-        ):
-            matches.append(event_name)
-
-    return matches
+        )
+    ]
 
 
 def identify_affected_coins(
@@ -189,36 +171,35 @@ def identify_affected_coins(
         if not isinstance(aliases, list):
             aliases = []
 
-        terms = [name, *aliases]
         matched_terms = []
 
-        for term in terms:
+        for term in [name, *aliases]:
             term = str(term).strip()
 
             if not term:
                 continue
 
-            normalized_term = _normalize_text(term)
-
             pattern = (
-                rf"(?<!\w){re.escape(normalized_term)}(?!\w)"
+                rf"(?<!\w){re.escape(_normalize_text(term))}(?!\w)"
             )
 
             if re.search(pattern, text):
                 matched_terms.append(term)
 
-        symbol_patterns = [
+        symbol_patterns = (
             rf"\${re.escape(symbol)}(?!\w)",
             rf"(?<!\w){re.escape(symbol)}"
             rf"\s*[/\-]\s*(?:USDT|USD|USDC|BTC)(?!\w)",
-        ]
+        )
 
         symbol_match = any(
-            re.search(pattern, text)
+            re.search(pattern, text, re.IGNORECASE)
             for pattern in symbol_patterns
         )
 
-        if (matched_terms or symbol_match) and symbol not in seen_symbols:
+        if (
+            matched_terms or symbol_match
+        ) and symbol not in seen_symbols:
             affected_coins.append({
                 "name": name,
                 "symbol": symbol,
@@ -237,15 +218,8 @@ def classify_sentiment(article: dict) -> dict:
         f"{article.get('summary', '')}"
     )
 
-    positive_matches = _find_keywords(
-        text,
-        POSITIVE_KEYWORDS,
-    )
-
-    negative_matches = _find_keywords(
-        text,
-        NEGATIVE_KEYWORDS,
-    )
+    positive_matches = _find_keywords(text, POSITIVE_KEYWORDS)
+    negative_matches = _find_keywords(text, NEGATIVE_KEYWORDS)
 
     positive_score = len(positive_matches)
     negative_score = len(negative_matches)
@@ -272,45 +246,25 @@ def classify_severity(article: dict) -> dict:
         f"{article.get('summary', '')}"
     )
 
-    critical_events = _find_patterns(
-        text,
-        CRITICAL_PATTERNS,
+    severity_rules = (
+        ("critical", CRITICAL_PATTERNS),
+        ("high", HIGH_PATTERNS),
+        ("medium", MEDIUM_PATTERNS),
+        ("low", LOW_PATTERNS),
     )
 
-    high_events = _find_patterns(
-        text,
-        HIGH_PATTERNS,
-    )
+    for severity, patterns in severity_rules:
+        matched_events = _find_patterns(text, patterns)
 
-    medium_events = _find_patterns(
-        text,
-        MEDIUM_PATTERNS,
-    )
-
-    low_events = _find_patterns(
-        text,
-        LOW_PATTERNS,
-    )
-
-    if critical_events:
-        severity = "critical"
-        matched_events = critical_events
-    elif high_events:
-        severity = "high"
-        matched_events = high_events
-    elif medium_events:
-        severity = "medium"
-        matched_events = medium_events
-    elif low_events:
-        severity = "low"
-        matched_events = low_events
-    else:
-        severity = "low"
-        matched_events = []
+        if matched_events:
+            return {
+                "severity": severity,
+                "matched_events": matched_events,
+            }
 
     return {
-        "severity": severity,
-        "matched_events": matched_events,
+        "severity": "low",
+        "matched_events": [],
     }
 
 
@@ -318,20 +272,15 @@ def classify_news(
     article: dict,
     assets: list[dict],
 ) -> dict:
-    sentiment = classify_sentiment(article)
-    severity = classify_severity(article)
-
-    affected_coins = identify_affected_coins(
-        article,
-        assets,
-    )
-
     return {
         "article_id": article.get("article_id"),
         "source": article.get("source"),
         "title": article.get("title"),
         "url": article.get("url"),
-        "sentiment": sentiment,
-        "severity": severity,
-        "affected_coins": affected_coins,
+        "sentiment": classify_sentiment(article),
+        "severity": classify_severity(article),
+        "affected_coins": identify_affected_coins(
+            article,
+            assets,
+        ),
     }

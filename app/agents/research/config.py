@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class ResearchConfig:
-    min_market_cap_rank: int = 101
+    min_market_cap_rank: int = 201
     max_market_cap_rank: int = 500
     min_quote_volume_usdt: float = 1_000_000
     quote_currency: str = "USDT"
@@ -13,6 +13,7 @@ class ResearchConfig:
         "USDT", "USDC", "USDS", "USDE", "DAI",
         "FDUSD", "TUSD", "USDP", "PYUSD", "BUSD",
         "RLUSD", "USD1", "EURC",
+        "A7A5", "YLDS", "STABLE",
     })
 
 

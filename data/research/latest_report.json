@@ -1,0 +1,668 @@
+{
+    "generated_at": "2026-11-16T14:08:22.806992+00:00",
+    "agent": "small_cap_research",
+    "total_projects": 5,
+    "ready_for_review": 1,
+    "partial_research": 4,
+    "insufficient_data": 0,
+    "projects": [
+        {
+            "name": "Convex Finance",
+            "symbol": "cvx",
+            "coingecko_id": "convex-finance",
+            "market_cap_rank": 205,
+            "market_cap": 130686636,
+            "current_price": 1.4,
+            "total_volume": 4075408,
+            "research_status": "ready",
+            "watchlist_status": "pending",
+            "score": 53.91,
+            "provisional_score": null,
+            "coverage_adjusted_score": 45.82,
+            "score_type": "final",
+            "score_reliability": "high",
+            "score_warning": null,
+            "is_final": true,
+            "coverage": 85.0,
+            "available_categories": [
+                "market_fundamentals",
+                "development_activity",
+                "project_growth",
+                "security"
+            ],
+            "unavailable_categories": [
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 77.85,
+                "development_activity": 17.41,
+                "project_growth": 24.4,
+                "security": 90.0,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "available",
+                "github": "available",
+                "token_contract": "available",
+                "goplus": "available",
+                "news": "unavailable"
+            },
+            "missing_sources": [
+                "news"
+            ],
+            "missing_categories": [
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 205,
+                    "market_cap_usd": 130686636.0,
+                    "volume_24h_usd": 4075408.0,
+                    "volume_to_market_cap_ratio": 0.0312,
+                    "rank_score": 73.93,
+                    "market_cap_score": 100,
+                    "liquidity_score": 62.37,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "recent_commit_count": 0,
+                    "recent_commit_data_available": true,
+                    "contributors_count": 4,
+                    "stars": 190,
+                    "commit_score": 0.0,
+                    "contributor_score": 20.0,
+                    "star_score": 57.03,
+                    "verified_repository": "convex-eth/platform",
+                    "method": "Preliminary verified GitHub activity heuristic"
+                },
+                "project_growth": {
+                    "protocol_name": "Convex Finance",
+                    "protocol_slug": "convex-finance",
+                    "latest_tvl_usd": 429887615.0,
+                    "previous_tvl_usd": 577795892.0,
+                    "tvl_growth_30d_percentage": -25.6,
+                    "growth_score": 24.4,
+                    "method": "30-day TVL growth heuristic; 0% growth scores 50"
+                },
+                "security": {
+                    "evaluated_checks": 11,
+                    "checks": {
+                        "is_honeypot": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "cannot_sell_all": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "hidden_owner": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "selfdestruct": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "external_call": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "owner_change_balance": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_blacklisted": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_mintable": {
+                            "value": true,
+                            "risk_detected": true,
+                            "penalty": 10
+                        },
+                        "is_open_source": {
+                            "value": true,
+                            "risk_detected": false,
+                            "penalty": 0
+                        }
+                    },
+                    "tax_results": {
+                        "buy_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        },
+                        "sell_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        }
+                    },
+                    "critical_flags": [
+                        "is_mintable"
+                    ],
+                    "security_score": 90.0,
+                    "method": "Preliminary GoPlus risk-flag penalty heuristic; not a security audit"
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [
+                {
+                    "category": "security",
+                    "risk": "is_mintable",
+                    "details": {
+                        "source": "GoPlus critical flag"
+                    }
+                },
+                {
+                    "category": "project_growth",
+                    "risk": "Negative TVL growth over 30 days",
+                    "details": {
+                        "tvl_growth_30d_percentage": -25.6
+                    }
+                }
+            ],
+            "research_conclusion": "Moderate research score - requires human review",
+            "human_review_required": true
+        },
+        {
+            "name": "dogwifhat",
+            "symbol": "wif",
+            "coingecko_id": "dogwifcoin",
+            "market_cap_rank": 201,
+            "market_cap": 131435976,
+            "current_price": 0.131556,
+            "total_volume": 24563564,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 94.99,
+            "provisional_score": 94.99,
+            "coverage_adjusted_score": 23.75,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 25.0,
+            "available_categories": [
+                "market_fundamentals"
+            ],
+            "unavailable_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 94.99,
+                "development_activity": null,
+                "project_growth": null,
+                "security": null,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "unverified",
+                "token_contract": "unavailable",
+                "goplus": "unavailable",
+                "news": "unavailable"
+            },
+            "missing_sources": [
+                "defillama",
+                "github",
+                "token_contract",
+                "goplus",
+                "news"
+            ],
+            "missing_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "development_activity",
+                    "reason": "GitHub repository is not verified and available"
+                },
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "security",
+                    "reason": "GoPlus security data is unavailable"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 201,
+                    "market_cap_usd": 131435976.0,
+                    "volume_24h_usd": 24563564.0,
+                    "volume_to_market_cap_ratio": 0.1869,
+                    "rank_score": 74.94,
+                    "market_cap_score": 100,
+                    "liquidity_score": 100,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "reason": "GitHub repository is not verified and available",
+                    "repository_status": "unverified",
+                    "matched_repository": null
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "reason": "GoPlus security data is unavailable",
+                    "source_status": "unavailable"
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        },
+        {
+            "name": "EigenCloud (prev. EigenLayer)",
+            "symbol": "eigen",
+            "coingecko_id": "eigenlayer",
+            "market_cap_rank": 202,
+            "market_cap": 131369710,
+            "current_price": 0.128711,
+            "total_volume": 9874161,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 94.94,
+            "provisional_score": 94.94,
+            "coverage_adjusted_score": 23.73,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 25.0,
+            "available_categories": [
+                "market_fundamentals"
+            ],
+            "unavailable_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 94.94,
+                "development_activity": null,
+                "project_growth": null,
+                "security": null,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "unverified",
+                "token_contract": "available",
+                "goplus": "available",
+                "news": "unavailable"
+            },
+            "missing_sources": [
+                "defillama",
+                "github",
+                "news"
+            ],
+            "missing_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "development_activity",
+                    "reason": "GitHub repository is not verified and available"
+                },
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "security",
+                    "reason": "Insufficient GoPlus indicators for scoring"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 202,
+                    "market_cap_usd": 131369710.0,
+                    "volume_24h_usd": 9874161.0,
+                    "volume_to_market_cap_ratio": 0.0752,
+                    "rank_score": 74.69,
+                    "market_cap_score": 100,
+                    "liquidity_score": 100,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "reason": "GitHub repository is not verified and available",
+                    "repository_status": "unverified",
+                    "matched_repository": null
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "reason": "Insufficient GoPlus indicators for scoring",
+                    "evaluated_checks": 4,
+                    "checks": {
+                        "cannot_sell_all": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_open_source": {
+                            "value": true,
+                            "risk_detected": false,
+                            "penalty": 0
+                        }
+                    },
+                    "tax_results": {
+                        "buy_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        },
+                        "sell_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        }
+                    },
+                    "critical_flags": []
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        },
+        {
+            "name": "Theta Network",
+            "symbol": "theta",
+            "coingecko_id": "theta-token",
+            "market_cap_rank": 203,
+            "market_cap": 131081185,
+            "current_price": 0.131026,
+            "total_volume": 3406870,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 55.07,
+            "provisional_score": 55.07,
+            "coverage_adjusted_score": 24.78,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 45.0,
+            "available_categories": [
+                "market_fundamentals",
+                "development_activity"
+            ],
+            "unavailable_categories": [
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 73.28,
+                "development_activity": 32.31,
+                "project_growth": null,
+                "security": null,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "available",
+                "token_contract": "unavailable",
+                "goplus": "unavailable",
+                "news": "unavailable"
+            },
+            "missing_sources": [
+                "defillama",
+                "token_contract",
+                "goplus",
+                "news"
+            ],
+            "missing_categories": [
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "security",
+                    "reason": "GoPlus security data is unavailable"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 203,
+                    "market_cap_usd": 131081185.0,
+                    "volume_24h_usd": 3406870.0,
+                    "volume_to_market_cap_ratio": 0.026,
+                    "rank_score": 74.44,
+                    "market_cap_score": 100,
+                    "liquidity_score": 51.98,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "recent_commit_count": 3,
+                    "recent_commit_data_available": true,
+                    "contributors_count": 8,
+                    "stars": 364,
+                    "commit_score": 15.0,
+                    "contributor_score": 40.0,
+                    "star_score": 64.06,
+                    "verified_repository": "thetatoken/theta-protocol-ledger",
+                    "method": "Preliminary verified GitHub activity heuristic"
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "reason": "GoPlus security data is unavailable",
+                    "source_status": "unavailable"
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        },
+        {
+            "name": "coco",
+            "symbol": "coco",
+            "coingecko_id": "coco-2",
+            "market_cap_rank": 204,
+            "market_cap": 130780896,
+            "current_price": 0.130781,
+            "total_volume": 44496,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 72.3,
+            "provisional_score": 72.3,
+            "coverage_adjusted_score": 32.53,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 45.0,
+            "available_categories": [
+                "market_fundamentals",
+                "security"
+            ],
+            "unavailable_categories": [
+                "development_activity",
+                "project_growth",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 50.14,
+                "development_activity": null,
+                "project_growth": null,
+                "security": 100.0,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "unverified",
+                "token_contract": "available",
+                "goplus": "available",
+                "news": "unavailable"
+            },
+            "missing_sources": [
+                "defillama",
+                "github",
+                "news"
+            ],
+            "missing_categories": [
+                "development_activity",
+                "project_growth",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "development_activity",
+                    "reason": "GitHub repository is not verified and available"
+                },
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 204,
+                    "market_cap_usd": 130780896.0,
+                    "volume_24h_usd": 44496.0,
+                    "volume_to_market_cap_ratio": 0.0003,
+                    "rank_score": 74.19,
+                    "market_cap_score": 100,
+                    "liquidity_score": 0.68,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "reason": "GitHub repository is not verified and available",
+                    "repository_status": "unverified",
+                    "matched_repository": null
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "evaluated_checks": 11,
+                    "checks": {
+                        "is_honeypot": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "cannot_sell_all": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "hidden_owner": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "selfdestruct": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "external_call": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "owner_change_balance": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_blacklisted": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_mintable": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_open_source": {
+                            "value": true,
+                            "risk_detected": false,
+                            "penalty": 0
+                        }
+                    },
+                    "tax_results": {
+                        "buy_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        },
+                        "sell_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        }
+                    },
+                    "critical_flags": [],
+                    "security_score": 100.0,
+                    "method": "Preliminary GoPlus risk-flag penalty heuristic; not a security audit"
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        }
+    ],
+    "disclaimer": "Research output only. No investment recommendation or trade execution is performed. Human review is required. Provisional scores must not be used as final rankings or approval signals. A research score does not establish token safety."
+}

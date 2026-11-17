@@ -1,7 +1,9 @@
+
 from typing import Literal
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -30,5 +32,7 @@ class Settings(BaseSettings):
     telegram_chat_id: str | None = None
 
     coingecko_api_key: SecretStr | None = None
+    github_token: SecretStr | None = None
+
 
 settings = Settings()

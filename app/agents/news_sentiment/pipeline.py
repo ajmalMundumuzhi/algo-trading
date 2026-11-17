@@ -3,6 +3,9 @@ import logging
 
 from app.agents.news_sentiment.classifier import classify_news
 from app.agents.news_sentiment.deduplicator import deduplicate_articles
+from app.agents.news_sentiment.fear_greed_collector import (
+    collect_fear_greed,
+)
 from app.agents.news_sentiment.repository import (
     get_active_news_assets,
     save_analyzed_articles,
@@ -29,6 +32,16 @@ async def run_news_analysis(assets: list[dict] | None = None) -> dict:
         collection = await client.fetch_all()
     finally:
         await client.close()
+
+    try:
+        fear_greed = await collect_fear_greed()
+    except Exception as exc:
+        logger.exception("Fear & Greed collection failed")
+
+        fear_greed = {
+            "status": "failed",
+            "error": str(exc),
+        }
 
     deduplication = deduplicate_articles(
         collection["articles"]
@@ -108,6 +121,7 @@ async def run_news_analysis(assets: list[dict] | None = None) -> dict:
     elif (
         collection["failed_sources"]
         or persistence["status"] == "failed"
+        or fear_greed["status"] != "success"
     ):
         pipeline_status = "partial"
     else:
@@ -116,21 +130,27 @@ async def run_news_analysis(assets: list[dict] | None = None) -> dict:
     return {
         "status": pipeline_status,
         "assets_loaded": len(assets),
+
         "collection": {
             "total_articles": collection["total_articles"],
             "successful_sources": collection["successful_sources"],
             "failed_sources": collection["failed_sources"],
         },
+
+        "fear_greed": fear_greed,
+
         "deduplication": {
             "total_received": deduplication["total_received"],
             "unique_articles": deduplication["unique_articles"],
             "duplicates_removed": deduplication["duplicates_removed"],
         },
+
         "analysis": {
             "total_analyzed": len(analyzed_articles),
             "sentiment_counts": sentiment_counts,
             "severity_counts": severity_counts,
         },
+
         "persistence": persistence,
         "articles": analyzed_articles,
     }

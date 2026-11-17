@@ -2,6 +2,7 @@
 import asyncio
 import logging
 import math
+import re
 
 import httpx
 
@@ -15,6 +16,18 @@ class CoinGeckoClient:
     BASE_URL = "https://api.coingecko.com/api/v3"
     MAX_ATTEMPTS = 3
     PAGE_SIZE = 250
+
+    SUPPORTED_GOPLUS_CHAINS = {
+        "ethereum": "1",
+        "binance-smart-chain": "56",
+        "polygon-pos": "137",
+        "arbitrum-one": "42161",
+        "optimistic-ethereum": "10",
+        "avalanche": "43114",
+        "base": "8453",
+    }
+
+    EVM_ADDRESS_PATTERN = re.compile(r"^0x[a-fA-F0-9]{40}$")
 
     def __init__(self):
         api_key = settings.coingecko_api_key
@@ -160,10 +173,63 @@ class CoinGeckoClient:
 
         return candidates
 
+    async def get_coin_details(
+        self,
+        coin_id: str,
+    ) -> dict:
+        if not coin_id:
+            raise ValueError("CoinGecko coin ID is required")
+
+        return await self._get_with_retry(
+            f"/coins/{coin_id}",
+            params={
+                "localization": "false",
+                "tickers": "false",
+                "market_data": "false",
+                "community_data": "false",
+                "developer_data": "false",
+                "sparkline": "false",
+            },
+        )
+
+    async def get_verified_token_contract(
+        self,
+        coin_id: str,
+    ) -> dict | None:
+        details = await self.get_coin_details(coin_id)
+
+        platforms = details.get("platforms") or {}
+
+        for platform, chain_id in self.SUPPORTED_GOPLUS_CHAINS.items():
+            contract_address = platforms.get(platform)
+
+            if not contract_address:
+                continue
+
+            if not self.EVM_ADDRESS_PATTERN.fullmatch(
+                contract_address
+            ):
+                logger.warning(
+                    "Invalid EVM contract address for %s on %s",
+                    coin_id,
+                    platform,
+                )
+                continue
+
+            return {
+                "chain_id": chain_id,
+                "contract_address": contract_address,
+                "platform": platform,
+                "coingecko_id": coin_id,
+                "source": "coingecko",
+            }
+
+        return None
+
     async def get_coin_list(self):
         return await self._get_with_retry(
             "/coins/list",
-            params={"include_platform": "false"},
+            params={"include_platform": "true"},
         )
 
     async def close(self):
