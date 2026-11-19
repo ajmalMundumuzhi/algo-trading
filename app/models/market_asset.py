@@ -21,7 +21,7 @@ class MarketAsset(BaseModel):
     )
 
     symbol: Mapped[str] = mapped_column(
-        String(30),
+        String(40),
         nullable=False,
     )
 

@@ -1,3 +1,4 @@
+
 from decimal import Decimal
 from uuid import UUID
 
@@ -7,6 +8,16 @@ from sqlalchemy.orm import Session
 
 from app.models.market_asset import MarketAsset
 from app.models.market_candle import MarketCandle
+
+
+def _get_upsert_count(result, submitted_count: int) -> int:
+    affected_rows = result.rowcount
+
+    if affected_rows is not None and affected_rows >= 0:
+        return affected_rows
+
+    return submitted_count
+
 
 def upsert_assets(db: Session, assets: list[dict]) -> int:
     if not assets:
@@ -30,6 +41,7 @@ def upsert_assets(db: Session, assets: list[dict]) -> int:
             ),
             "is_active": True,
         })
+
     statement = insert(MarketAsset).values(records)
 
     statement = statement.on_conflict_do_update(
@@ -48,10 +60,12 @@ def upsert_assets(db: Session, assets: list[dict]) -> int:
     try:
         result = db.execute(statement)
         db.commit()
-        return result.rowcount or 0
+        return _get_upsert_count(result, len(records))
+
     except Exception:
         db.rollback()
         raise
+
 
 def upsert_candles(
     db: Session,
@@ -75,7 +89,7 @@ def upsert_candles(
             "high": Decimal(str(candle["high"])),
             "low": Decimal(str(candle["low"])),
             "close": Decimal(str(candle["close"])),
-            "volume": Decimal(str(candle["volume"]))
+            "volume": Decimal(str(candle["volume"])),
         })
 
     statement = insert(MarketCandle).values(records)
@@ -88,14 +102,15 @@ def upsert_candles(
             "low": statement.excluded.low,
             "close": statement.excluded.close,
             "volume": statement.excluded.volume,
-            "updated_at": func.now()
+            "updated_at": func.now(),
         },
     )
 
     try:
         result = db.execute(statement)
         db.commit()
-        return result.rowcount or 0
+        return _get_upsert_count(result, len(records))
+
     except Exception:
         db.rollback()
         raise

@@ -25,6 +25,11 @@ EXCLUDED_NAME_PATTERNS = [
     r"\bgovernment bond fund\b",
     r"\btokenized stock\b",
     r"\btokenized equity\b",
+    r"\bbstocks\b",
+    r"\bleveraged\s+(?:etf|token)\b",
+    r"\binverse\s+etf\b",
+    r"\b(?:2x|3x|5x)\s+(?:bull|bear)?\s*etf\b",
+    r"\b(?:bull|bear)\s+(?:2x|3x|5x)\s+etf\b",
     r"\bwrapped bitcoin\b",
     r"\bwrapped ether\b",
 ]

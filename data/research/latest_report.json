@@ -1,59 +1,452 @@
 {
-    "generated_at": "2026-11-16T14:08:22.806992+00:00",
+    "generated_at": "2026-11-19T14:44:10.077948+00:00",
     "agent": "small_cap_research",
     "total_projects": 5,
-    "ready_for_review": 1,
-    "partial_research": 4,
+    "ready_for_review": 0,
+    "partial_research": 5,
     "insufficient_data": 0,
     "projects": [
         {
-            "name": "Convex Finance",
-            "symbol": "cvx",
-            "coingecko_id": "convex-finance",
-            "market_cap_rank": 205,
-            "market_cap": 130686636,
-            "current_price": 1.4,
-            "total_volume": 4075408,
-            "research_status": "ready",
+            "name": "Tradable LatAm Fintech SSTN",
+            "symbol": "pc0000097",
+            "coingecko_id": "tradable-latam-fintech-sstn",
+            "market_cap_rank": 201,
+            "market_cap": 134000000,
+            "current_price": 1.0,
+            "total_volume": 0.0,
+            "research_status": "partial",
             "watchlist_status": "pending",
-            "score": 53.91,
-            "provisional_score": null,
-            "coverage_adjusted_score": 45.82,
-            "score_type": "final",
-            "score_reliability": "high",
-            "score_warning": null,
-            "is_final": true,
-            "coverage": 85.0,
+            "score": 49.99,
+            "provisional_score": 49.99,
+            "coverage_adjusted_score": 12.5,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 25.0,
             "available_categories": [
-                "market_fundamentals",
-                "development_activity",
-                "project_growth",
-                "security"
+                "market_fundamentals"
             ],
             "unavailable_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
                 "news_sentiment"
             ],
             "category_scores": {
-                "market_fundamentals": 77.85,
-                "development_activity": 17.41,
-                "project_growth": 24.4,
+                "market_fundamentals": 49.99,
+                "development_activity": null,
+                "project_growth": null,
+                "security": null,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "unverified",
+                "token_contract": "unavailable",
+                "goplus": "unavailable",
+                "news": "unavailable",
+                "market_data": "unavailable"
+            },
+            "missing_sources": [
+                "defillama",
+                "github",
+                "token_contract",
+                "goplus",
+                "news",
+                "market_data"
+            ],
+            "market_data": {
+                "status": "unavailable",
+                "reason": "No active market asset found for CoinGecko ID",
+                "timeframe": "1h",
+                "latest_candle_price": null,
+                "previous_candle_price": null,
+                "price_change_pct": null,
+                "volume": null,
+                "latest_candle_timestamp": null,
+                "candle_age_minutes": null
+            },
+            "missing_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "development_activity",
+                    "reason": "GitHub repository is not verified and available"
+                },
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "security",
+                    "reason": "GoPlus security data is unavailable"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 201,
+                    "market_cap_usd": 134000000.0,
+                    "volume_24h_usd": 0.0,
+                    "volume_to_market_cap_ratio": 0.0,
+                    "rank_score": 74.94,
+                    "market_cap_score": 100,
+                    "liquidity_score": 0.0,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "reason": "GitHub repository is not verified and available",
+                    "repository_status": "unverified",
+                    "matched_repository": null
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "reason": "GoPlus security data is unavailable",
+                    "source_status": "unavailable"
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        },
+        {
+            "name": "EigenCloud (prev. EigenLayer)",
+            "symbol": "eigen",
+            "coingecko_id": "eigenlayer",
+            "market_cap_rank": 202,
+            "market_cap": 133457503,
+            "current_price": 0.130413,
+            "total_volume": 17859338,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 94.94,
+            "provisional_score": 94.94,
+            "coverage_adjusted_score": 23.73,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 25.0,
+            "available_categories": [
+                "market_fundamentals"
+            ],
+            "unavailable_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 94.94,
+                "development_activity": null,
+                "project_growth": null,
+                "security": null,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "unverified",
+                "token_contract": "available",
+                "goplus": "available",
+                "news": "unavailable",
+                "market_data": "available"
+            },
+            "missing_sources": [
+                "defillama",
+                "github",
+                "news"
+            ],
+            "market_data": {
+                "status": "available",
+                "reason": null,
+                "timeframe": "1h",
+                "latest_candle_price": 0.1313,
+                "previous_candle_price": 0.1321,
+                "price_change_pct": -0.6056,
+                "volume": 525507.56,
+                "latest_candle_timestamp": "2026-11-19T13:00:00+00:00",
+                "candle_age_minutes": 44.1
+            },
+            "missing_categories": [
+                "development_activity",
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "development_activity",
+                    "reason": "GitHub repository is not verified and available"
+                },
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "security",
+                    "reason": "Insufficient GoPlus indicators for scoring"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "News sentiment data is unavailable"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 202,
+                    "market_cap_usd": 133457503.0,
+                    "volume_24h_usd": 17859338.0,
+                    "volume_to_market_cap_ratio": 0.1338,
+                    "rank_score": 74.69,
+                    "market_cap_score": 100,
+                    "liquidity_score": 100,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "reason": "GitHub repository is not verified and available",
+                    "repository_status": "unverified",
+                    "matched_repository": null
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "reason": "Insufficient GoPlus indicators for scoring",
+                    "evaluated_checks": 4,
+                    "checks": {
+                        "cannot_sell_all": {
+                            "value": false,
+                            "risk_detected": false,
+                            "penalty": 0
+                        },
+                        "is_open_source": {
+                            "value": true,
+                            "risk_detected": false,
+                            "penalty": 0
+                        }
+                    },
+                    "tax_results": {
+                        "buy_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        },
+                        "sell_tax": {
+                            "value": 0.0,
+                            "penalty": 0
+                        }
+                    },
+                    "critical_flags": []
+                },
+                "news_sentiment": {
+                    "reason": "News sentiment data is unavailable"
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        },
+        {
+            "name": "Theta Network",
+            "symbol": "theta",
+            "coingecko_id": "theta-token",
+            "market_cap_rank": 203,
+            "market_cap": 132927584,
+            "current_price": 0.132928,
+            "total_volume": 3240612,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 54.27,
+            "provisional_score": 54.27,
+            "coverage_adjusted_score": 24.42,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 45.0,
+            "available_categories": [
+                "market_fundamentals",
+                "development_activity"
+            ],
+            "unavailable_categories": [
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 71.83,
+                "development_activity": 32.31,
+                "project_growth": null,
+                "security": null,
+                "news_sentiment": null
+            },
+            "source_status": {
+                "defillama": "unavailable",
+                "github": "available",
+                "token_contract": "unavailable",
+                "goplus": "unavailable",
+                "news": "available",
+                "market_data": "unavailable"
+            },
+            "missing_sources": [
+                "defillama",
+                "token_contract",
+                "goplus",
+                "market_data"
+            ],
+            "market_data": {
+                "status": "unavailable",
+                "reason": "No active market asset found for CoinGecko ID",
+                "timeframe": "1h",
+                "latest_candle_price": null,
+                "previous_candle_price": null,
+                "price_change_pct": null,
+                "volume": null,
+                "latest_candle_timestamp": null,
+                "candle_age_minutes": null
+            },
+            "missing_categories": [
+                "project_growth",
+                "security",
+                "news_sentiment"
+            ],
+            "research_gaps": [
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                {
+                    "category": "security",
+                    "reason": "GoPlus security data is unavailable"
+                },
+                {
+                    "category": "news_sentiment",
+                    "reason": "At least 3 matched analyzed articles are required"
+                }
+            ],
+            "evidence": {
+                "market_fundamentals": {
+                    "market_cap_rank": 203,
+                    "market_cap_usd": 132927584.0,
+                    "volume_24h_usd": 3240612.0,
+                    "volume_to_market_cap_ratio": 0.0244,
+                    "rank_score": 74.44,
+                    "market_cap_score": 100,
+                    "liquidity_score": 48.76,
+                    "method": "Preliminary market fundamentals heuristic"
+                },
+                "development_activity": {
+                    "recent_commit_count": 3,
+                    "recent_commit_data_available": true,
+                    "contributors_count": 8,
+                    "stars": 364,
+                    "commit_score": 15.0,
+                    "contributor_score": 40.0,
+                    "star_score": 64.06,
+                    "verified_repository": "thetatoken/theta-protocol-ledger",
+                    "method": "Preliminary verified GitHub activity heuristic"
+                },
+                "project_growth": {
+                    "reason": "DeFiLlama data is unavailable"
+                },
+                "security": {
+                    "reason": "GoPlus security data is unavailable",
+                    "source_status": "unavailable"
+                },
+                "news_sentiment": {
+                    "reason": "At least 3 matched analyzed articles are required",
+                    "article_count": 2
+                }
+            },
+            "identified_risks": [],
+            "research_conclusion": "Provisional research score - additional data required before final evaluation",
+            "human_review_required": true
+        },
+        {
+            "name": "OriginTrail",
+            "symbol": "trac",
+            "coingecko_id": "origintrail",
+            "market_cap_rank": 205,
+            "market_cap": 131879669,
+            "current_price": 0.294852,
+            "total_volume": 1496008,
+            "research_status": "partial",
+            "watchlist_status": "pending",
+            "score": 73.33,
+            "provisional_score": 73.33,
+            "coverage_adjusted_score": 33.0,
+            "score_type": "provisional",
+            "score_reliability": "low",
+            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "is_final": false,
+            "coverage": 45.0,
+            "available_categories": [
+                "market_fundamentals",
+                "security"
+            ],
+            "unavailable_categories": [
+                "development_activity",
+                "project_growth",
+                "news_sentiment"
+            ],
+            "category_scores": {
+                "market_fundamentals": 60.0,
+                "development_activity": null,
+                "project_growth": null,
                 "security": 90.0,
                 "news_sentiment": null
             },
             "source_status": {
-                "defillama": "available",
-                "github": "available",
+                "defillama": "unavailable",
+                "github": "error",
                 "token_contract": "available",
                 "goplus": "available",
-                "news": "unavailable"
+                "news": "unavailable",
+                "market_data": "unavailable"
             },
             "missing_sources": [
-                "news"
+                "defillama",
+                "github",
+                "news",
+                "market_data"
             ],
+            "market_data": {
+                "status": "unavailable",
+                "reason": "No active market asset found for CoinGecko ID",
+                "timeframe": "1h",
+                "latest_candle_price": null,
+                "previous_candle_price": null,
+                "price_change_pct": null,
+                "volume": null,
+                "latest_candle_timestamp": null,
+                "candle_age_minutes": null
+            },
             "missing_categories": [
+                "development_activity",
+                "project_growth",
                 "news_sentiment"
             ],
             "research_gaps": [
+                {
+                    "category": "development_activity",
+                    "reason": "GitHub repository is not verified and available"
+                },
+                {
+                    "category": "project_growth",
+                    "reason": "DeFiLlama data is unavailable"
+                },
                 {
                     "category": "news_sentiment",
                     "reason": "News sentiment data is unavailable"
@@ -62,33 +455,21 @@
             "evidence": {
                 "market_fundamentals": {
                     "market_cap_rank": 205,
-                    "market_cap_usd": 130686636.0,
-                    "volume_24h_usd": 4075408.0,
-                    "volume_to_market_cap_ratio": 0.0312,
+                    "market_cap_usd": 131879669.0,
+                    "volume_24h_usd": 1496008.0,
+                    "volume_to_market_cap_ratio": 0.0113,
                     "rank_score": 73.93,
                     "market_cap_score": 100,
-                    "liquidity_score": 62.37,
+                    "liquidity_score": 22.69,
                     "method": "Preliminary market fundamentals heuristic"
                 },
                 "development_activity": {
-                    "recent_commit_count": 0,
-                    "recent_commit_data_available": true,
-                    "contributors_count": 4,
-                    "stars": 190,
-                    "commit_score": 0.0,
-                    "contributor_score": 20.0,
-                    "star_score": 57.03,
-                    "verified_repository": "convex-eth/platform",
-                    "method": "Preliminary verified GitHub activity heuristic"
+                    "reason": "GitHub repository is not verified and available",
+                    "repository_status": "error",
+                    "matched_repository": null
                 },
                 "project_growth": {
-                    "protocol_name": "Convex Finance",
-                    "protocol_slug": "convex-finance",
-                    "latest_tvl_usd": 429887615.0,
-                    "previous_tvl_usd": 577795892.0,
-                    "tvl_growth_30d_percentage": -25.6,
-                    "growth_score": 24.4,
-                    "method": "30-day TVL growth heuristic; 0% growth scores 50"
+                    "reason": "DeFiLlama data is unavailable"
                 },
                 "security": {
                     "evaluated_checks": 11,
@@ -166,345 +547,8 @@
                     "details": {
                         "source": "GoPlus critical flag"
                     }
-                },
-                {
-                    "category": "project_growth",
-                    "risk": "Negative TVL growth over 30 days",
-                    "details": {
-                        "tvl_growth_30d_percentage": -25.6
-                    }
                 }
             ],
-            "research_conclusion": "Moderate research score - requires human review",
-            "human_review_required": true
-        },
-        {
-            "name": "dogwifhat",
-            "symbol": "wif",
-            "coingecko_id": "dogwifcoin",
-            "market_cap_rank": 201,
-            "market_cap": 131435976,
-            "current_price": 0.131556,
-            "total_volume": 24563564,
-            "research_status": "partial",
-            "watchlist_status": "pending",
-            "score": 94.99,
-            "provisional_score": 94.99,
-            "coverage_adjusted_score": 23.75,
-            "score_type": "provisional",
-            "score_reliability": "low",
-            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
-            "is_final": false,
-            "coverage": 25.0,
-            "available_categories": [
-                "market_fundamentals"
-            ],
-            "unavailable_categories": [
-                "development_activity",
-                "project_growth",
-                "security",
-                "news_sentiment"
-            ],
-            "category_scores": {
-                "market_fundamentals": 94.99,
-                "development_activity": null,
-                "project_growth": null,
-                "security": null,
-                "news_sentiment": null
-            },
-            "source_status": {
-                "defillama": "unavailable",
-                "github": "unverified",
-                "token_contract": "unavailable",
-                "goplus": "unavailable",
-                "news": "unavailable"
-            },
-            "missing_sources": [
-                "defillama",
-                "github",
-                "token_contract",
-                "goplus",
-                "news"
-            ],
-            "missing_categories": [
-                "development_activity",
-                "project_growth",
-                "security",
-                "news_sentiment"
-            ],
-            "research_gaps": [
-                {
-                    "category": "development_activity",
-                    "reason": "GitHub repository is not verified and available"
-                },
-                {
-                    "category": "project_growth",
-                    "reason": "DeFiLlama data is unavailable"
-                },
-                {
-                    "category": "security",
-                    "reason": "GoPlus security data is unavailable"
-                },
-                {
-                    "category": "news_sentiment",
-                    "reason": "News sentiment data is unavailable"
-                }
-            ],
-            "evidence": {
-                "market_fundamentals": {
-                    "market_cap_rank": 201,
-                    "market_cap_usd": 131435976.0,
-                    "volume_24h_usd": 24563564.0,
-                    "volume_to_market_cap_ratio": 0.1869,
-                    "rank_score": 74.94,
-                    "market_cap_score": 100,
-                    "liquidity_score": 100,
-                    "method": "Preliminary market fundamentals heuristic"
-                },
-                "development_activity": {
-                    "reason": "GitHub repository is not verified and available",
-                    "repository_status": "unverified",
-                    "matched_repository": null
-                },
-                "project_growth": {
-                    "reason": "DeFiLlama data is unavailable"
-                },
-                "security": {
-                    "reason": "GoPlus security data is unavailable",
-                    "source_status": "unavailable"
-                },
-                "news_sentiment": {
-                    "reason": "News sentiment data is unavailable"
-                }
-            },
-            "identified_risks": [],
-            "research_conclusion": "Provisional research score - additional data required before final evaluation",
-            "human_review_required": true
-        },
-        {
-            "name": "EigenCloud (prev. EigenLayer)",
-            "symbol": "eigen",
-            "coingecko_id": "eigenlayer",
-            "market_cap_rank": 202,
-            "market_cap": 131369710,
-            "current_price": 0.128711,
-            "total_volume": 9874161,
-            "research_status": "partial",
-            "watchlist_status": "pending",
-            "score": 94.94,
-            "provisional_score": 94.94,
-            "coverage_adjusted_score": 23.73,
-            "score_type": "provisional",
-            "score_reliability": "low",
-            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
-            "is_final": false,
-            "coverage": 25.0,
-            "available_categories": [
-                "market_fundamentals"
-            ],
-            "unavailable_categories": [
-                "development_activity",
-                "project_growth",
-                "security",
-                "news_sentiment"
-            ],
-            "category_scores": {
-                "market_fundamentals": 94.94,
-                "development_activity": null,
-                "project_growth": null,
-                "security": null,
-                "news_sentiment": null
-            },
-            "source_status": {
-                "defillama": "unavailable",
-                "github": "unverified",
-                "token_contract": "available",
-                "goplus": "available",
-                "news": "unavailable"
-            },
-            "missing_sources": [
-                "defillama",
-                "github",
-                "news"
-            ],
-            "missing_categories": [
-                "development_activity",
-                "project_growth",
-                "security",
-                "news_sentiment"
-            ],
-            "research_gaps": [
-                {
-                    "category": "development_activity",
-                    "reason": "GitHub repository is not verified and available"
-                },
-                {
-                    "category": "project_growth",
-                    "reason": "DeFiLlama data is unavailable"
-                },
-                {
-                    "category": "security",
-                    "reason": "Insufficient GoPlus indicators for scoring"
-                },
-                {
-                    "category": "news_sentiment",
-                    "reason": "News sentiment data is unavailable"
-                }
-            ],
-            "evidence": {
-                "market_fundamentals": {
-                    "market_cap_rank": 202,
-                    "market_cap_usd": 131369710.0,
-                    "volume_24h_usd": 9874161.0,
-                    "volume_to_market_cap_ratio": 0.0752,
-                    "rank_score": 74.69,
-                    "market_cap_score": 100,
-                    "liquidity_score": 100,
-                    "method": "Preliminary market fundamentals heuristic"
-                },
-                "development_activity": {
-                    "reason": "GitHub repository is not verified and available",
-                    "repository_status": "unverified",
-                    "matched_repository": null
-                },
-                "project_growth": {
-                    "reason": "DeFiLlama data is unavailable"
-                },
-                "security": {
-                    "reason": "Insufficient GoPlus indicators for scoring",
-                    "evaluated_checks": 4,
-                    "checks": {
-                        "cannot_sell_all": {
-                            "value": false,
-                            "risk_detected": false,
-                            "penalty": 0
-                        },
-                        "is_open_source": {
-                            "value": true,
-                            "risk_detected": false,
-                            "penalty": 0
-                        }
-                    },
-                    "tax_results": {
-                        "buy_tax": {
-                            "value": 0.0,
-                            "penalty": 0
-                        },
-                        "sell_tax": {
-                            "value": 0.0,
-                            "penalty": 0
-                        }
-                    },
-                    "critical_flags": []
-                },
-                "news_sentiment": {
-                    "reason": "News sentiment data is unavailable"
-                }
-            },
-            "identified_risks": [],
-            "research_conclusion": "Provisional research score - additional data required before final evaluation",
-            "human_review_required": true
-        },
-        {
-            "name": "Theta Network",
-            "symbol": "theta",
-            "coingecko_id": "theta-token",
-            "market_cap_rank": 203,
-            "market_cap": 131081185,
-            "current_price": 0.131026,
-            "total_volume": 3406870,
-            "research_status": "partial",
-            "watchlist_status": "pending",
-            "score": 55.07,
-            "provisional_score": 55.07,
-            "coverage_adjusted_score": 24.78,
-            "score_type": "provisional",
-            "score_reliability": "low",
-            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
-            "is_final": false,
-            "coverage": 45.0,
-            "available_categories": [
-                "market_fundamentals",
-                "development_activity"
-            ],
-            "unavailable_categories": [
-                "project_growth",
-                "security",
-                "news_sentiment"
-            ],
-            "category_scores": {
-                "market_fundamentals": 73.28,
-                "development_activity": 32.31,
-                "project_growth": null,
-                "security": null,
-                "news_sentiment": null
-            },
-            "source_status": {
-                "defillama": "unavailable",
-                "github": "available",
-                "token_contract": "unavailable",
-                "goplus": "unavailable",
-                "news": "unavailable"
-            },
-            "missing_sources": [
-                "defillama",
-                "token_contract",
-                "goplus",
-                "news"
-            ],
-            "missing_categories": [
-                "project_growth",
-                "security",
-                "news_sentiment"
-            ],
-            "research_gaps": [
-                {
-                    "category": "project_growth",
-                    "reason": "DeFiLlama data is unavailable"
-                },
-                {
-                    "category": "security",
-                    "reason": "GoPlus security data is unavailable"
-                },
-                {
-                    "category": "news_sentiment",
-                    "reason": "News sentiment data is unavailable"
-                }
-            ],
-            "evidence": {
-                "market_fundamentals": {
-                    "market_cap_rank": 203,
-                    "market_cap_usd": 131081185.0,
-                    "volume_24h_usd": 3406870.0,
-                    "volume_to_market_cap_ratio": 0.026,
-                    "rank_score": 74.44,
-                    "market_cap_score": 100,
-                    "liquidity_score": 51.98,
-                    "method": "Preliminary market fundamentals heuristic"
-                },
-                "development_activity": {
-                    "recent_commit_count": 3,
-                    "recent_commit_data_available": true,
-                    "contributors_count": 8,
-                    "stars": 364,
-                    "commit_score": 15.0,
-                    "contributor_score": 40.0,
-                    "star_score": 64.06,
-                    "verified_repository": "thetatoken/theta-protocol-ledger",
-                    "method": "Preliminary verified GitHub activity heuristic"
-                },
-                "project_growth": {
-                    "reason": "DeFiLlama data is unavailable"
-                },
-                "security": {
-                    "reason": "GoPlus security data is unavailable",
-                    "source_status": "unavailable"
-                },
-                "news_sentiment": {
-                    "reason": "News sentiment data is unavailable"
-                }
-            },
-            "identified_risks": [],
             "research_conclusion": "Provisional research score - additional data required before final evaluation",
             "human_review_required": true
         },
@@ -512,52 +556,63 @@
             "name": "coco",
             "symbol": "coco",
             "coingecko_id": "coco-2",
-            "market_cap_rank": 204,
-            "market_cap": 130780896,
-            "current_price": 0.130781,
-            "total_volume": 44496,
+            "market_cap_rank": 206,
+            "market_cap": 131224026,
+            "current_price": 0.131224,
+            "total_volume": 19891.92,
             "research_status": "partial",
             "watchlist_status": "pending",
-            "score": 72.3,
-            "provisional_score": 72.3,
-            "coverage_adjusted_score": 32.53,
+            "score": 66.61,
+            "provisional_score": 66.61,
+            "coverage_adjusted_score": 39.97,
             "score_type": "provisional",
-            "score_reliability": "low",
-            "score_warning": "Very limited research coverage. The provisional score is based on a small subset of categories and must not be used to rank or approve this project.",
+            "score_reliability": "moderate",
+            "score_warning": "Provisional score: some research categories are missing. Do not treat this as a complete project ranking.",
             "is_final": false,
-            "coverage": 45.0,
+            "coverage": 60.0,
             "available_categories": [
                 "market_fundamentals",
-                "security"
+                "security",
+                "news_sentiment"
             ],
             "unavailable_categories": [
                 "development_activity",
-                "project_growth",
-                "news_sentiment"
+                "project_growth"
             ],
             "category_scores": {
-                "market_fundamentals": 50.14,
+                "market_fundamentals": 49.87,
                 "development_activity": null,
                 "project_growth": null,
                 "security": 100.0,
-                "news_sentiment": null
+                "news_sentiment": 50.0
             },
             "source_status": {
                 "defillama": "unavailable",
                 "github": "unverified",
                 "token_contract": "available",
                 "goplus": "available",
-                "news": "unavailable"
+                "news": "available",
+                "market_data": "unavailable"
             },
             "missing_sources": [
                 "defillama",
                 "github",
-                "news"
+                "market_data"
             ],
+            "market_data": {
+                "status": "unavailable",
+                "reason": "No active market asset found for CoinGecko ID",
+                "timeframe": "1h",
+                "latest_candle_price": null,
+                "previous_candle_price": null,
+                "price_change_pct": null,
+                "volume": null,
+                "latest_candle_timestamp": null,
+                "candle_age_minutes": null
+            },
             "missing_categories": [
                 "development_activity",
-                "project_growth",
-                "news_sentiment"
+                "project_growth"
             ],
             "research_gaps": [
                 {
@@ -567,21 +622,17 @@
                 {
                     "category": "project_growth",
                     "reason": "DeFiLlama data is unavailable"
-                },
-                {
-                    "category": "news_sentiment",
-                    "reason": "News sentiment data is unavailable"
                 }
             ],
             "evidence": {
                 "market_fundamentals": {
-                    "market_cap_rank": 204,
-                    "market_cap_usd": 130780896.0,
-                    "volume_24h_usd": 44496.0,
-                    "volume_to_market_cap_ratio": 0.0003,
-                    "rank_score": 74.19,
+                    "market_cap_rank": 206,
+                    "market_cap_usd": 131224026.0,
+                    "volume_24h_usd": 19891.92,
+                    "volume_to_market_cap_ratio": 0.0002,
+                    "rank_score": 73.68,
                     "market_cap_score": 100,
-                    "liquidity_score": 0.68,
+                    "liquidity_score": 0.3,
                     "method": "Preliminary market fundamentals heuristic"
                 },
                 "development_activity": {
@@ -656,7 +707,188 @@
                     "method": "Preliminary GoPlus risk-flag penalty heuristic; not a security audit"
                 },
                 "news_sentiment": {
-                    "reason": "News sentiment data is unavailable"
+                    "period_days": 7,
+                    "article_count": 20,
+                    "sentiment_counts": {
+                        "positive": 0,
+                        "negative": 0,
+                        "neutral": 20
+                    },
+                    "severity_counts": {
+                        "low": 20,
+                        "medium": 0,
+                        "high": 0,
+                        "critical": 0
+                    },
+                    "score": 50.0,
+                    "scoring_method": "Severity-weighted sentiment heuristic: positive=+1, neutral=0, negative=-1",
+                    "discovery_sources": [
+                        "Google News RSS"
+                    ],
+                    "articles": [
+                        {
+                            "title": "Why Coco Gauff did her talking about the WTA Finals hot mic on the court - The Athletic - The New York Times",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxONE8tUjF0YUNEWG1xVklJUllJVzk3THhnMlRYU3Y4MW5nUUI4SDNPd281ekdIOEFESHJvbmtvSUpCUV9mZ2V1QlllZnVOZ2lhcXoteTN5a0tzcDZwWDNGNGdfdV84eXR3cmJNMV9tU0JkcDVnMHRiMGFLdjlxOTRCV2pBR2U5T25Xckc5ejhZc1dobk82Ukp3SVRoWnFxdw?oc=5",
+                            "published_at": "2026-11-15T08:00:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Fans react to Tennis Channel’s CoCo Vandeweghe’s erratic commentary at WTA Finals - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPS1Vpbnl1Z1dnV0dleWl3eEZIWGMtY1NlbmtmdzNnNkFJVGIwd0FOSFNJUmhKaWdQVTc3WUhMTWdpU0ZYd1JHejdDbnN6b3RoWGJNTTRBWU1QaHhGY3lGckZaMy0wdExOZnJtWVRucGU3YldXakZIMnV0QjZDRnVJLUtWNjJLUQ?oc=5",
+                            "published_at": "2026-11-13T02:30:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Rivalry Rewind: The best of Coco Gauff vs. Linda Noskova - WTA Tennis",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSThFWmxOY1VzSnhFQVp3Tnl4NUI0dGtBUGlEXzVoSVEyYXotblNBQ1d2YzZzdGdzanQxb1doSGpLd3FvRmFXcnZfaGlldU02U2s5dzBnNlIzQTNCa0NrME9fZXo5SU5DZlpSdHR1b1RlTUswUVNtY0VvdHJCMXZjcFFvMlBlX3FFSkdLck8zSmlsdHRFM29kbHdqNWw?oc=5",
+                            "published_at": "2026-11-16T08:00:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Fay Moreland Coco Obituary Nov 17, 2026 - Miguez Funeral Home",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5DWUNUbXdmNHY1R2x6aDZkdmdUMnh5Y2lESFh5NFhjV2Y0Tm04UUlqaFJlaGRFd1d3ak9BUmloNTMySWxyODNod3ZZS1lpMXNVdFJnN3FOREFGanlpUFRuMUtHQQ?oc=5",
+                            "published_at": "2026-11-17T08:00:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "What's New in CoCo Desktop 2.0: From Data Issue to Fix - Snowflake",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPc2hKRmtMWklQV2dfM0tsUTNUZmlhMFlhSkJLOTNQVzFkRWJwTHpEMVBvbklac2VXR2NBREtoNGZQVEpyenRScW9TX0h6NnUyTFNHaFJGUzRJOVlCd3RPTzVhaTRPSXZOUW5pNDV3SXF1U1luemlVRTJ0OW1CZnVFQ1IwQkVPY09TY0IxNndDUE9IN0g4YUs2N1dXSVNhR0RQczB6Q0VZaVA1SXQ3R05GQzVzQzNyUWktYWVn?oc=5",
+                            "published_at": "2026-11-18T00:37:04+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "WTA Finals 2026: Coco Gauff and Aryna Sabalenka set to shine - full schedule and how to watch as the season ends at Indian Wells - Olympics",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQQlladnBRY0hReDBCSFBPOGxBUU1ubDA5RW53U1MtcFNqVlpzMXNZSTBFdFlKTFYzeUlleTQxMHVIc2FJTFAxYnN6VEF0b29xMTdyYnBET1UxYlFjdjAwOG1QVWxVaXQzN0owZ2pycmpxVEFtWmx5UlNmcmVvOHo0NmZRaUZKdk4xOWJPYzM3OEdNRDA?oc=5",
+                            "published_at": "2026-11-15T15:42:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "WTA Finals: Jessica Pegula saves match point to beat Linda Noskova, Coco Gauff out - BBC",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBVejBPZHIxVnFzYmVHcTlBX3ZjQ3pEVGRtRGtKLWk3c1czVjhHOFBUU182SUkwYUcwX3h4NU1DZFMzVFNZYllxR0QzQVk1WGNzcHRDQlhsNFRMS2FhS0tTcno1YU5DUQ?oc=5",
+                            "published_at": "2026-11-12T22:27:18+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "ARTnews Awards 2026 Emerging Artist of the Year: Coco Klockner - ARTnews.com",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPM2txRWFZNjdGbFpVR19ybUZ0STRNZUZPZkVwd19TYTlIempSVGpBV3hOTmRhT2hDOU4zSlZvSFB6d2RjQmtlcUlfM0o1MkxNQ2diZUJEU3gycTdlZy0xRTFQX09VanRmZTYwenZmR2JBT3VyUk9sN0ZmalpPalhuVWQ3ck1DSnFjUmtLUjE0UWh2bnhkaXJwbHQ0TS15UjRiTHdvWQ?oc=5",
+                            "published_at": "2026-11-14T22:50:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Camellia Petal Blight | HOrT COCO-UC Master Gardener Program of Contra Costa - UC Agriculture and Natural Resources",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNZHRIRThVc0hDT1dpbXlGQzFXTGZUZW95QnNha1dvOGpNeG5WRlRMLUN2bFU3MWlsMVRYSnJLYmRtRTBZMVVwWlRVUGxFX01GSk1oR1RkVk5nR3gxaTQxT2VHbXhDVy1wU2dlWlhVcHIwTGVVdU1OR2UydnFWLVloeUpBcVE1NWIxVXVoc19NSVNENHZaQXFOMmtaR01TZ0hTczFuRA?oc=5",
+                            "published_at": "2026-11-17T02:45:58+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Kaua‘i’s Mayor-Elect: ‘I Don’t Want To See Coco Palms Rebuilt’ - Honolulu Civil Beat",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPRFZ1S3lqUEtsR3Vuc0s1ZEhCM1FRYnVJZnJ5WXhUSFFRZTVaOHZBdy0zZkY1MnVKRzNQRUhCdGNHLTdSWGU4SFZjQ2FMZGtmV0lCQU9lNUdTOTFjUVFrUEh5dGFkdURUVzlQZUVjYi1FTTZUY000cy1BM01sbmRpMVd6amNENE1Ua3RWRGM3Z2Rya2I2YXc?oc=5",
+                            "published_at": "2026-11-16T16:01:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "They’re crazy about Coco - 501 LIFE Magazine",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBZcUVuVmJSR0lrVVkydzJzWVlHNTVQNHQzVktKTTNrSEF2eW1PSFBvV2RPYlRnRWJPa2ZYNVc4TC1YMFZwSnd1TlFKTTdBNDNTZ2lMSndJX0t2STg?oc=5",
+                            "published_at": "2026-11-16T04:01:59+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Coco Gauff Clears The Air About ‘Stupid’ WTA Finals Rules Complaint After Backlash - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPMmZXXzY5bWRnNmN1TTFDa1AzdERyT3NlY2h3MVUtZWF4bjA2NnJHaDZDcEJwQUozNVN3UVJiQzlEZlV2eTJEM1VTOVNEajVlNjZVM091dk1wb0NhOUQ4eVFXTmt0MDFPQURRUlVZZmQtRGV2eTN6cjA3bnV3NVIySUl0QQ?oc=5",
+                            "published_at": "2026-11-13T09:18:33+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Rivalry Rewind: The best of Coco Gauff vs. Marta Kostyuk - WTA Tennis",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQUnFCTV9hUUVtQ1lpcFJzTTZrNmQzY1FRbXBCRTk3bFZ2dFZ0bHhGNGtPOEZqeExpbXN6MVktM0dtZXhwV1ZObDIxbGZFUGZhMERGUV9UbW9sc1J2TGhIVFpKUUtuX3pLUy1yWmJXRjZpRVR0S1JxbEtnYlV6MjMzWDBFelNpLUx5UG0xNWNLMXdRNHdYaUdHd20zQkI?oc=5",
+                            "published_at": "2026-11-16T08:00:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Coco Gauff clarifies her recent comments which got misunderstood, ‘Can I clear that up?’ - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNRFJTWWQxOHJOTWdxT0JSUTV5SHo1bXc4Q2c5bkZZd3BhYk1ZRjRPQUMtLWxabllwYllTeVNVVnVGbkdFWERKMmI5ck9ZbEFpRHhiZFdaTlI1OWFfS1VERTdraHFwcFU0eEk1ejhRQmxsT0dnRFlEcWdIT2RWTXBCaVZzVk1CN00?oc=5",
+                            "published_at": "2026-11-13T11:00:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Coco Gauff posts message on social media after being eliminated from the WTA Finals - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPX0NfaXZBUk9zVkxjdUh4LUk5UDhiXzVaZkxpVnpIcElYQUFxX0Y3ZVFMcUZ0M2xhQ1htSDNoYVoweXA3QUwwdFBjQ3o2TmtscDc4cV9FeHdFMW5mN2dSQWt5NWRWV09BVjhJdzRTdlZNNXUyQjJmVmdKT0ZqODlFSy1NbEhnQVE?oc=5",
+                            "published_at": "2026-11-13T10:00:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Coco Gauff Reveals Plans That Make Her Happy She’s Out at WTA Finals - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWFVGSW1nRXkyZVg5N1FoSjlqTVhOc1dxQ2M5ZzFENlhyLS1GckdyNDVCNFpIQktnUTJtbFUwRDRFNFhoUE5LRUF0ejhJamV2QThGREVUbXdocnFfVG5tbVZHU1RUNU9TbDV0WHZWVi11VnpqZEhVcmNCcmNhc3MwQTRaNA?oc=5",
+                            "published_at": "2026-11-13T19:10:42+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Coco Gauff Gives Emotional Statement After ‘Bittersweet’ Ending To WTA Finals 2026 - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNTlBSRDNYcWFiOWdUYlJwUUsybDlKbmVmVjREVWpMekZJWW95VVVCb1NwbUlFU2gtYVZHakxyN1ptWFFPQzhDbldHVkwzel8zN3pxV01scWVhTUEzTDdyNm1wdnNORHFfZVEzcTNQSFRhXzRUMXlzczdDOXdmU0gxWXNBVXNpRlFFSVJlMFhB?oc=5",
+                            "published_at": "2026-11-13T11:56:52+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Can Coco Gauff Still Qualify for the Semis of WTA Finals? Qualification Scenarios Explained - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQMjNQczJqeF9CN1p1eUljNzBIZ2RlbEhubGRsa3VQRWhXc0s1bFJSMERvOWZUYWVBMDB6cDdkNjl6eTZOU0M2cTl2bU9VVzd2UDhFMVdzY0oyc19QZ2tOU3d6eEY3MUlIR0thX0xnN1NhQ0d4UEp4dkp6NkE5ZGZSSmRHTzMzdw?oc=5",
+                            "published_at": "2026-11-12T22:15:13+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "What Happens If Coco Gauff Wins or Loses vs. Marta Kostyuk? WTA Finals Knockout Qualification Explained - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQVVBJbndkYnVqSG8yUmpPLU9QVE8yX29VVDlacmE2RWRMd0J2clVORmNKTDlFcG1YU2pEd3pvVXo1NDA2VTNsYUM3LWJXVDhiNmFsSVJwQlY3Mk9ZQkl1RzN2QmF1Mm5jaWNtNTRSbFNmUEJ2US1GbFRWSjk5anFIOUxsT04?oc=5",
+                            "published_at": "2026-11-12T19:45:00+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        },
+                        {
+                            "title": "Coco Gauff Turns WTA Finals Heartbreak Into Hometown Billie Jean King Cup Opportunity - Yahoo Sports",
+                            "source": "google_news_coco_2",
+                            "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPSVkzVVNlbnVKZFE0S1BSVDRSTkdaQnVINGl2RDg3SlJVLV80OVNuYlBzUDJKZmVpNU5qLURBQmVNc1h3bmE2NXlGUHJDTDdMRFlOR0t0TUxya0pJM2swc1A5QjdyUGlmWGQ3TjNkelRjbWkyVGVtQ1V2M1hIWEoyNW5B?oc=5",
+                            "published_at": "2026-11-13T16:06:39+00:00",
+                            "sentiment": "neutral",
+                            "severity": "low"
+                        }
+                    ],
+                    "evidence_note": "Combined from returned article evidence. Article evidence is limited to the first 20 records per source.",
+                    "method": "Matched article sentiment score"
                 }
             },
             "identified_risks": [],

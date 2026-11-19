@@ -26,7 +26,7 @@ class MarketCandle(BaseModel):
     )
 
     symbol: Mapped[str] = mapped_column(
-        String(40),
+        String(30),
         nullable=False,
     )
 

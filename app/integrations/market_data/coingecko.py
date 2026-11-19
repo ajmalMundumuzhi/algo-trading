@@ -114,17 +114,42 @@ class CoinGeckoClient:
 
                 await asyncio.sleep(delay)
 
-    async def get_top_coins(self, limit: int = 200):
-        return await self._get_with_retry(
-            "/coins/markets",
-            params={
-                "vs_currency": "usd",
-                "order": "market_cap_desc",
-                "per_page": min(limit, self.PAGE_SIZE),
-                "page": 1,
-                "sparkline": "false",
-            },
+    
+    async def get_top_coins(self, limit: int = 200) -> list[dict]:
+        if limit < 1:
+            raise ValueError("Coin limit must be positive")
+
+        coins = []
+        total_pages = math.ceil(limit / self.PAGE_SIZE)
+
+        for page in range(1, total_pages + 1):
+            remaining = limit - len(coins)
+            per_page = min(remaining, self.PAGE_SIZE)
+
+            page_coins = await self._get_with_retry(
+                "/coins/markets",
+                params={
+                    "vs_currency": "usd",
+                    "order": "market_cap_desc",
+                    "per_page": per_page,
+                    "page": page,
+                    "sparkline": "false",
+                },
+            )
+
+            coins.extend(page_coins)
+
+            if len(page_coins) < per_page:
+                break
+
+        logger.info(
+            "Retrieved %s coins from CoinGecko (requested %s)",
+            len(coins),
+            limit,
         )
+
+        return coins
+
 
     async def get_ranked_candidates(
         self,

@@ -2,6 +2,9 @@
 from datetime import datetime, timezone
 
 
+VALID_SOURCE_STATUSES = {"available", "success"}
+
+
 def extract_project_risks(evidence: dict) -> list[dict]:
     risks = []
     seen = set()
@@ -111,6 +114,18 @@ def extract_research_gaps(
     return gaps
 
 
+def normalize_source_status(source) -> str:
+    if not isinstance(source, dict):
+        return "unavailable"
+
+    status = source.get("status", "unavailable")
+
+    if not isinstance(status, str) or not status.strip():
+        return "unavailable"
+
+    return status.strip().lower()
+
+
 def build_research_report(results: list[dict]) -> dict:
     projects = []
 
@@ -137,15 +152,49 @@ def build_research_report(results: list[dict]) -> dict:
         )
 
         source_status = {
-            name: source.get("status", "unavailable")
+            name: normalize_source_status(source)
             for name, source in sources.items()
         }
 
         missing_sources = [
             name
             for name, status in source_status.items()
-            if status not in {"available", "success"}
+            if status not in VALID_SOURCE_STATUSES
         ]
+
+        market_data = sources.get("market_data", {})
+
+        if not isinstance(market_data, dict):
+            market_data = {
+                "status": "unavailable",
+                "reason": "Invalid market-data response",
+            }
+
+        market_data_status = normalize_source_status(
+            market_data
+        )
+
+        market_data_summary = {
+            "status": market_data_status,
+            "reason": market_data.get("reason"),
+            "timeframe": market_data.get("timeframe"),
+            "latest_candle_price": market_data.get(
+                "latest_candle_price"
+            ),
+            "previous_candle_price": market_data.get(
+                "previous_candle_price"
+            ),
+            "price_change_pct": market_data.get(
+                "price_change_pct"
+            ),
+            "volume": market_data.get("volume"),
+            "latest_candle_timestamp": market_data.get(
+                "latest_candle_timestamp"
+            ),
+            "candle_age_minutes": market_data.get(
+                "candle_age_minutes"
+            ),
+        }
 
         unavailable_categories = score_data.get(
             "unavailable_categories",
@@ -219,6 +268,7 @@ def build_research_report(results: list[dict]) -> dict:
 
             "source_status": source_status,
             "missing_sources": missing_sources,
+            "market_data": market_data_summary,
             "missing_categories": unavailable_categories,
             "research_gaps": research_gaps,
 
@@ -300,6 +350,28 @@ def print_research_report(report: dict) -> None:
 
         for source, status in project["source_status"].items():
             print(f"      {source}: {status}")
+
+        market_data = project["market_data"]
+
+        print(
+            "   Market data details: "
+            f"{market_data['status']}"
+        )
+
+        if market_data["reason"]:
+            print(f"      Reason: {market_data['reason']}")
+
+        if market_data["latest_candle_timestamp"]:
+            print(
+                "      Latest candle: "
+                f"{market_data['latest_candle_timestamp']}"
+            )
+
+        if market_data["candle_age_minutes"] is not None:
+            print(
+                "      Candle age: "
+                f"{market_data['candle_age_minutes']} minutes"
+            )
 
         if project["research_gaps"]:
             print("   Research gaps:")

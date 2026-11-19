@@ -89,7 +89,7 @@ def get_candidate_identifiers(candidate: dict) -> set[str]:
 
 
 
-AMBIGUOUS_COIN_IDENTIFIERS = {"cash"}
+AMBIGUOUS_COIN_IDENTIFIERS = {"cash", "bedrock", "coco"}
 
 
 def matches_candidate_text(

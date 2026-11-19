@@ -28,7 +28,9 @@ def test_explicit_cash_dollar_symbol_matches():
 def test_cash_usd_trading_pair_matches():
     candidate = {"name": "CASH", "symbol": "cash"}
 
-    article = make_article("CASH/USD trading volume increases")
+    article = make_article(
+        "CASH/USD trading volume increases"
+    )
 
     assert matches_candidate_text(candidate, article) is True
 
@@ -101,3 +103,101 @@ def test_unrelated_structured_coin_does_not_match():
     )
 
     assert article_matches_candidate(candidate, article) is False
+
+
+def test_bare_br_does_not_match_unrelated_article():
+    candidate = {
+        "name": "Bedrock",
+        "symbol": "BR",
+    }
+
+    article = make_article(
+        "Ethereum blockchain development continues to grow"
+    )
+
+    assert matches_candidate_text(candidate, article) is False
+
+
+def test_bare_trac_does_not_match_unrelated_article():
+    candidate = {
+        "name": "OriginTrail",
+        "symbol": "TRAC",
+    }
+
+    article = make_article(
+        "Safe wallet loses funds after security breach"
+    )
+
+    assert matches_candidate_text(candidate, article) is False
+
+
+def test_br_dollar_symbol_matches():
+    candidate = {
+        "name": "Bedrock",
+        "symbol": "BR",
+    }
+
+    article = make_article(
+        "The $BR token gains attention in crypto markets"
+    )
+
+    assert matches_candidate_text(candidate, article) is True
+
+
+def test_trac_usdt_pair_matches():
+    candidate = {
+        "name": "OriginTrail",
+        "symbol": "TRAC",
+    }
+
+    article = make_article(
+        "TRAC/USDT trading volume increases"
+    )
+
+    assert matches_candidate_text(candidate, article) is True
+
+
+def test_origintrail_exact_name_matches():
+    candidate = {
+        "name": "OriginTrail",
+        "symbol": "TRAC",
+    }
+
+    article = make_article(
+        "OriginTrail announces a network development"
+    )
+
+    assert matches_candidate_text(candidate, article) is True
+
+
+def test_bedrock_generic_word_does_not_match():
+    candidate = {
+        "name": "Bedrock",
+        "symbol": "BR",
+    }
+
+    article = make_article(
+        "The company builds its business on a solid bedrock"
+    )
+
+    assert matches_candidate_text(candidate, article) is False
+
+
+def test_bedrock_structured_affected_coin_matches():
+    candidate = {
+        "id": "bedrock",
+        "name": "Bedrock",
+        "symbol": "BR",
+    }
+
+    article = make_article(
+        "A new development in the crypto ecosystem",
+        affected_coins=[
+            {
+                "name": "Bedrock",
+                "symbol": "BR",
+            }
+        ],
+    )
+
+    assert article_matches_candidate(candidate, article) is True
